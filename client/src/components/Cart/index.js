@@ -5,7 +5,6 @@ import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
-// Change here
 import { selectCart, selectCartOpen } from '../../utils/GlobalState';
 import { useSelector, useDispatch } from 'react-redux'
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
@@ -14,11 +13,9 @@ import './style.css';
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
-  // Change here to use dispatchers
   const dispatch = useDispatch();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
-  // get cart selector
   const cart = useSelector(selectCart);
   const cartOpen = useSelector(selectCartOpen);
 
@@ -33,7 +30,6 @@ const Cart = () => {
   useEffect(() => {
     async function getCart() {
       const cart = await idbPromise('cart', 'get');
-      // Change this
       dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
     }
 
@@ -43,7 +39,6 @@ const Cart = () => {
   }, [cart.length, dispatch]);
 
   function toggleCart() {
-    // Change this
     dispatch({ type: TOGGLE_CART });
   }
 

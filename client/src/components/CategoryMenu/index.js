@@ -10,18 +10,14 @@ import { QUERY_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
-  // Change to use redux dispatch
   const dispatch = useDispatch();
 
-  // Change to use selector
   const categories = useSelector(selectCategories);
-  // console.log(categories);
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
   useEffect(() => {
     if (categoryData) {
-      // Change here
       console.log(categoryData)
       dispatch({
         type: UPDATE_CATEGORIES,
@@ -32,7 +28,6 @@ function CategoryMenu() {
       });
     } else if (!loading) {
       idbPromise('categories', 'get').then((categories) => {
-        // Change here
         dispatch({
           type: UPDATE_CATEGORIES,
           categories: categories,
@@ -42,7 +37,6 @@ function CategoryMenu() {
   }, [categoryData, loading, dispatch]);
 
   const handleClick = (id) => {
-    // Change here
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,
       currentCategory: id,

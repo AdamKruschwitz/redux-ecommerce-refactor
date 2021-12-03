@@ -9,10 +9,8 @@ import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
 function ProductList() {
-  // Change here to use redux dispatch
   const dispatch = useDispatch();
 
-  // Change here to use selector
   const currentCategory = useSelector(selectCurrentCategory);
   const products = useSelector(selectProducts);
   
@@ -20,7 +18,6 @@ function ProductList() {
 
   useEffect(() => {
     if (data) {
-      // Change here
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.products,
@@ -30,7 +27,6 @@ function ProductList() {
       });
     } else if (!loading) {
       idbPromise('products', 'get').then((products) => {
-        // Change here
         dispatch({
           type: UPDATE_PRODUCTS,
           products: products,
@@ -49,7 +45,6 @@ function ProductList() {
     );
   }
 
-  // Replace products.length with products.length from selector
   return (
     <div className="my-2">
       <h2>Our Products:</h2>

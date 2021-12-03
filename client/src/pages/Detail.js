@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import Cart from '../components/Cart';
-// Change this to get redux things (dispatchers and selectors)
 import { selectCart, selectProducts } from '../utils/GlobalState';
 import {
   REMOVE_FROM_CART,
@@ -17,7 +16,6 @@ import spinner from '../assets/spinner.gif';
 import { useSelector, useDispatch } from 'react-redux';
 
 function Detail() {
-  // Change this to use the dispatchers
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -25,7 +23,6 @@ function Detail() {
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  // Change here to use selectors
   const cart = useSelector(selectCart);
   const products = useSelector(selectProducts);
 
@@ -36,7 +33,6 @@ function Detail() {
     }
     // retrieved from server
     else if (data) {
-      // Change here to use redux syntax
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.products,
@@ -49,7 +45,6 @@ function Detail() {
     // get cache from idb
     else if (!loading) {
       idbPromise('products', 'get').then((indexedProducts) => {
-        // Change here
         dispatch({
           type: UPDATE_PRODUCTS,
           products: indexedProducts,
@@ -61,7 +56,6 @@ function Detail() {
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id);
     if (itemInCart) {
-      // Change here
       dispatch({
         type: UPDATE_CART_QUANTITY,
         _id: id,
@@ -72,7 +66,6 @@ function Detail() {
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
       });
     } else {
-      // Change here
       dispatch({
         type: ADD_TO_CART,
         product: { ...currentProduct, purchaseQuantity: 1 },
@@ -82,7 +75,6 @@ function Detail() {
   };
 
   const removeFromCart = () => {
-    // Change here
     dispatch({
       type: REMOVE_FROM_CART,
       _id: currentProduct._id,
