@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 
 import Cart from '../components/Cart';
 // Change this to get redux things (dispatchers and selectors)
-import { useStoreContext } from '../utils/GlobalState';
+import { selectCart, selectProducts } from '../utils/GlobalState';
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
@@ -14,10 +14,11 @@ import {
 import { QUERY_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Detail() {
   // Change this to use the dispatchers
-  const [state, dispatch] = useStoreContext();
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
@@ -25,7 +26,8 @@ function Detail() {
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
   // Change here to use selectors
-  const { products, cart } = state;
+  const cart = useSelector(selectCart);
+  const products = useSelector(selectProducts);
 
   useEffect(() => {
     // already in global store

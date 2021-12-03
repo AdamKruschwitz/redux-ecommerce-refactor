@@ -10,12 +10,10 @@ const StoreProvider = ({ value = [], ...props }) => {
   return <Provider store={store} {...props} />;
 };
 
-const useStoreContext = () => {
-  return useContext(StoreContext);
-};
-
 const selectCart = state => state.cart;
 const selectCategories = state => state.categories;
+const selectCurrentCategory = state => state.currentCategory;
 const selectProducts = state => state.products;
+const selectCartOpen = state => state.cartOpen;
 
-export { StoreProvider, useStoreContext, selectCart, selectCategories, selectProducts };
+export { StoreProvider, selectCart, selectCategories, selectProducts, selectCurrentCategory, selectCartOpen };

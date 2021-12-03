@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { useStoreContext } from '../../utils/GlobalState';
+import { useSelector, useDispatch } from 'react-redux'
+import { selectCategories } from '../../utils/GlobalState';
 import {
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
@@ -10,16 +11,18 @@ import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
   // Change to use redux dispatch
-  const [state, dispatch] = useStoreContext();
+  const dispatch = useDispatch();
 
   // Change to use selector
-  const { categories } = state;
+  const categories = useSelector(selectCategories);
+  // console.log(categories);
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
   useEffect(() => {
     if (categoryData) {
       // Change here
+      console.log(categoryData)
       dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories,
