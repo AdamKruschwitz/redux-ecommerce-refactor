@@ -18,6 +18,11 @@ clone the project, then from the root of the project run npm install, then npm r
 ## Usage Information
 Log in, create an account, and select items to purchase. You can search for items by category. When you're satisfied with your cart, you can click on the cart icon and click checkout to be redirected to the checkout page where you can pay for your items using the stripe API.
 
+## Demo
+
+See the live site [here](#)
+![A demo of the storefront](demo.gif)
+
 ## Program Tests
 npm run test
 
